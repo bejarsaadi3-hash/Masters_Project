@@ -4,4 +4,4 @@ pillow
 google-genai
 python-dotenv
 requests
-gradio
+streamlit
