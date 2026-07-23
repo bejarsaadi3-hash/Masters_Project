@@ -1,0 +1,7 @@
+torch
+torchvision
+pillow
+google-genai
+python-dotenv
+requests
+gradio
