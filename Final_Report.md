@@ -122,7 +122,8 @@ The vision backbone relies on **ResNet-50**, chosen for its deep residual learni
 
 The network architecture, implemented in PyTorch as `MultiTaskCarEstimator`, performs feature extraction and multimodal fusion:
 1. **Backbone Truncation:** The original fully connected classification layer (`backbone.fc`) of ImageNet-pretrained ResNet-50 is replaced with `nn.Identity()`. Passing an image $\mathbf{X} \in \mathbb{R}^{3 \times 224 \times 224}$ through the feature extractor yields a visual representation vector $\mathbf{v}_{img} \in \mathbb{R}^{2048}$.
-2. **Categorical Metadata Embeddings:** Vehicle Make and Year integers pass through trainable lookup tables (`nn.Embedding(15, 64)` and `nn.Embedding(30, 64)`), projecting categorical variables into continuous latent spaces $\mathbf{e}_{brand} \in \mathbb{R}^{64}$ and $\mathbf{e}_{year} \in \mathbb{R}^{64}$.
+2.  **Categorical Metadata Embeddings:** Vehicle Make and Year integers pass through trainable lookup tables (`nn.Embedding(15, 64)` and `nn.Embedding(30, 64)`), projecting categorical variables into continuous latent spaces:
+   $$ \mathbf{e}_{brand} \in \mathbb{R}^{64}, \quad \mathbf{e}_{year} \in \mathbb{R}^{64} $$
 3. **Multimodal Feature Fusion:** The visual vector and metadata embeddings are concatenated into a unified latent representation $\mathbf{x}_{fused} \in \mathbb{R}^{2176}$:
 
 $$\mathbf{x}_{\text{fused}} = [\mathbf{v}_{\text{img}} \,\Vert{}\, \mathbf{e}_{\text{brand}} \,\Vert{}\, \mathbf{e}_{\text{year}}]$$
